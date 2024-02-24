@@ -12,7 +12,8 @@ export class Posts {
   @Prop()
   description: string;
 
-  media: Express.Multer.File;
+  @Prop()
+  media: string;
 
   @Prop()
   location: string;

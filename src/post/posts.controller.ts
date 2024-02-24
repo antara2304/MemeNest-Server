@@ -25,11 +25,10 @@ export class PostsController {
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(
     @UploadedFile() file: Express.Multer.File,
-    @Body() data: Posts,
+    @Body() data,
   ): Promise<Posts> {
-    console.log(file);
-    data.media = file;
-    console.log(data);
+    const encoded = file.buffer.toString('base64');
+    data.media = `data:image/png;base64,${encoded}`;
     return this.postSvc.create(data);
   }
 }
