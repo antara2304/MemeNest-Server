@@ -7,13 +7,16 @@ import {
   Post,
   Put,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { Posts } from './posts.schema';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('post')
+@UseGuards(AuthGuard)
 export class PostsController {
   constructor(private postSvc: PostsService) {}
 
