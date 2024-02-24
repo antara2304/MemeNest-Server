@@ -23,4 +23,8 @@ export class UserService {
   async getUserData(email: string): Promise<User> {
     return this.userModel.findOne({ email }).exec();
   }
+
+  async delete(id) {
+    return this.userModel.findOneAndDelete(id);
+  }
 }

@@ -10,6 +10,9 @@ export class Posts {
   userId: User;
 
   @Prop()
+  userName: string;
+
+  @Prop()
   description: string;
 
   @Prop()
@@ -24,16 +27,24 @@ export class Posts {
   @Prop({
     type: [
       {
-        userID: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
         msg: String,
       },
     ],
     default: [],
   })
-  comment: { userID: string; msg: string }[];
+  comments: { userID: User; msg: string }[];
 
-  @Prop()
-  reaction: { userID: string; like: boolean }[];
+  @Prop({
+    type: [
+      {
+        userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        like: Boolean,
+      },
+    ],
+    default: [],
+  })
+  reaction: { userId: User; like: boolean }[];
 }
 
 export const PostsSchema = SchemaFactory.createForClass(Posts);
